@@ -1,0 +1,3 @@
+([('Study Buddy',
+   '/Users/jaronbloom/Projects/Code/study-buddy/dist/Study Buddy',
+   'EXECUTABLE')],)

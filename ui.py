@@ -1,4 +1,3 @@
-import sys
 from PyQt6.QtWidgets import (
     QWidget, QLabel, QPushButton, QSpinBox,
     QListWidget, QLineEdit, QVBoxLayout, QHBoxLayout
@@ -88,6 +87,7 @@ class StudyBuddy(QWidget):
 
         # ---- State ----
         self.is_paused = False
+        self.has_started = False  # NEW: tracks if first study session has started
 
         # ---- Signals ----
         self.start_button.clicked.connect(self.handle_start)
@@ -96,6 +96,12 @@ class StudyBuddy(QWidget):
         self.remove_block_button.clicked.connect(self.remove_blocked_app)
 
     # ------------------ Logic ------------------
+
+    def safe_notify(self, title, message):
+        try:
+            send_notification(title, message)
+        except Exception as e:
+            print("Notification error:", e)
 
     def handle_start(self):
         if not self.timer.isActive() and self.timer_logic.remaining_seconds == 0:
@@ -113,21 +119,23 @@ class StudyBuddy(QWidget):
         self.timer_logic.sessions_left = self.interval_input.value()
         self.start_study()
         self.start_button.setText("Pause")
-
-        apps = [self.block_list.item(i).text() for i in range(self.block_list.count())]
-        self.blocker.set_blocked_apps(apps)
+        self.sync_blocked_apps()
 
     def start_study(self):
         self.status_label.setText("Study Time")
         self.timer_logic.start_study(self.study_input.value())
         self.timer.start(1000)
-        send_notification("Study Started", "Time to focus")
+
+        # Only notify if this is NOT the first study session
+        if self.has_started:
+            self.safe_notify("Study Started", "Time to focus")
+        self.has_started = True  # mark first start as done
 
     def start_break(self):
         self.status_label.setText("Break Time")
         self.timer_logic.start_break(self.break_input.value())
         self.timer.start(1000)
-        send_notification("Break Time", "Take a break")
+        self.safe_notify("Break Time", "Take a break")
 
     def update_timer(self):
         if self.timer_logic.is_study and not self.is_paused:
@@ -145,7 +153,7 @@ class StudyBuddy(QWidget):
                 self.timer_logic.sessions_left -= 1
                 if self.timer_logic.sessions_left == 0:
                     self.status_label.setText("All sessions complete!")
-                    send_notification("Done", "Great job!")
+                    self.safe_notify("Done", "Great job!")
                     self.start_button.setText("Start")
                 else:
                     self.start_break()
@@ -163,11 +171,12 @@ class StudyBuddy(QWidget):
         self.timer_label.setText("00:00")
         self.status_label.setText("Ready")
         self.start_button.setText("Start")
+        self.has_started = False  # Reset the first-start flag
 
     def add_blocked_app(self):
-        app_name = self.block_input.text().strip()
-        if app_name:
-            self.block_list.addItem(app_name)
+        name = self.block_input.text().strip()
+        if name:
+            self.block_list.addItem(name)
             self.block_input.clear()
             self.sync_blocked_apps()
 
@@ -177,8 +186,5 @@ class StudyBuddy(QWidget):
         self.sync_blocked_apps()
 
     def sync_blocked_apps(self):
-        blocked_apps = [
-            self.block_list.item(i).text()
-            for i in range(self.block_list.count())
-        ]
-        self.blocker.set_blocked_apps(blocked_apps)
+        apps = [self.block_list.item(i).text() for i in range(self.block_list.count())]
+        self.blocker.set_blocked_apps(apps)
