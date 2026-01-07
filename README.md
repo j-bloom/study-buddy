@@ -13,7 +13,14 @@ Users can select programs on their system to block, allowing the user to stay fo
 
 In the below image steam will be blocked while study timers are active, if the program is open before starting the timer it will be shut down.  
 
-<img width="321" height="450" alt="image" src="https://github.com/user-attachments/assets/34d4904a-797f-4a12-a03b-cb1f5dd7b5a5" />  <img width="325" height="455" alt="image" src="https://github.com/user-attachments/assets/99119007-ef5c-403e-a923-6d30ce6ac555" />  
+<img width="321" height="450" alt="image" src="https://github.com/user-attachments/assets/34d4904a-797f-4a12-a03b-cb1f5dd7b5a5" />  <img width="325" height="455" alt="image" src="https://github.com/user-attachments/assets/99119007-ef5c-403e-a923-6d30ce6ac555" />    
+
+Some issues you may come across, is a Windows Defender blue screen, to bypass this click More Info and then run anyway. This message appears because I do not have a Windows signing Key and Microsoft doesn't like running apps that aren't signed.
+<img width="536" height="499" alt="image" src="https://github.com/user-attachments/assets/e2f2b034-2117-422a-9a44-6305295dd91e" />  
+
+
+
+
 
 
 
