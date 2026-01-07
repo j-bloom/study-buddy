@@ -16,11 +16,14 @@ In the below image steam will be blocked while study timers are active, if the p
 <img width="321" height="450" alt="image" src="https://github.com/user-attachments/assets/34d4904a-797f-4a12-a03b-cb1f5dd7b5a5" />  <img width="325" height="455" alt="image" src="https://github.com/user-attachments/assets/99119007-ef5c-403e-a923-6d30ce6ac555" />    
 
 Some issues you may come across, is a Windows Defender blue screen, to bypass this click More Info and then run anyway. This message appears because I do not have a Windows signing Key and Microsoft doesn't like running apps that aren't signed.
-<img width="536" height="499" alt="image" src="https://github.com/user-attachments/assets/e2f2b034-2117-422a-9a44-6305295dd91e" />  
+<img width="536" height="499" alt="image" src="https://github.com/user-attachments/assets/e2f2b034-2117-422a-9a44-6305295dd91e" />   
 
+If you are using MacOS a similar error will occur, this is becasue I do not have an apple developer account so apple provides this message.
+<img width="264" height="239" alt="Screenshot 2026-01-07 at 1 42 37 PM" src="https://github.com/user-attachments/assets/9d70d96c-5d6e-4e8d-a173-58c905aa5ba4" />  
+To bypass this and use the program you will need to go to "System -> Privacy and Security", then scroll down to this message  
+<img width="499" height="180" alt="Screenshot 2026-01-07 at 1 47 27 PM" src="https://github.com/user-attachments/assets/176ccb3e-c434-46ba-a173-e171abb8b884" />
 
-
-
+Again, these massages only appear becasue these are personal projects and I do not have apple or microsoft developer accounts.
 
 
 
